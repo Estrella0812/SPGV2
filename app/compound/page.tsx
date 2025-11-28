@@ -267,7 +267,7 @@ export default function VehicleCompoundPage() {
           variants={fadeUp}
         >
           {/* LEFT SIDE TITLE */}
-          <div className="flex items-start">
+          <div className="flex items-start lg:min-h-[280px]">
             <h2 className="text-3xl font-semibold leading-tight">
               Facility Infrastructure
             </h2>
