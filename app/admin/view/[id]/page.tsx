@@ -24,6 +24,7 @@ export default async function PositionDetails({ params }: { params: Promise<{ id
                                     query: {
                                     id: career?.id.toString()
                                     },}}  
+                                    prefetch={false}
                                     className=" text-center bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 transition"
                                 >Edit</Link>
                                 <DeleteComp title={career?.title} id={career?.id} />

@@ -1,8 +1,8 @@
 // app/vehicle-compound/page.tsx
-"use client";
+'use client'
 
 import Image from "next/image";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, number } from "motion/react";
 import type { IconType } from "react-icons";
 import {
   FaCarSide,
@@ -20,7 +20,7 @@ import {
   FaMinus,
   FaPlus,
 } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type ServiceItem = {
   title: string;
@@ -132,14 +132,15 @@ const staggerContainer = {
 };
 
 export default function VehicleCompoundPage() {
-  const [openIndex, setOpenIndex] = useState(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggle = (i: number) => {
-    setOpenIndex(i);
+    setOpenIndex((prev) => (prev === i ? null : i));
   };
 
+
   return (
-    <div className="min-h-screen bg-[#ececec] text-[#1c1b1b]">
+    <div className="bg-[#ececec] text-[#1c1b1b]">
       {/* HERO */}
       <section className="justify-center main-slider w-full">
         <div className="main-slider relative">
@@ -314,6 +315,7 @@ export default function VehicleCompoundPage() {
           </div>
         </motion.div>
       </section>
+      
       {/* Values */}
       <section className="min-h-[80vh] flex items-center mx-auto max-w-6xl lg:px-0 px-4 py-10 pb-16 space-y-16 md:space-y-64">
         <motion.section

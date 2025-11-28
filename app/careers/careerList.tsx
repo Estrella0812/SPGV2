@@ -12,6 +12,7 @@ export default async function CareerList({ currentPage }: { currentPage: number 
         <div className="flex flex-col gap-y-4">
           {careers.slice(0, 5).map((career) => (
             <Link
+              prefetch={false}
               href={`/careers/careerdetail/${career.id}`}
               className="border-[var(--text-dark)] border-1 p-4 flex justify-between"
               key={career.id}
@@ -33,6 +34,7 @@ export default async function CareerList({ currentPage }: { currentPage: number 
         <div className="flex flex-col gap-y-4">
           {careers.slice(5, 10).map((career) => (
             <Link
+              prefetch={false}
               href={`/careers/careerdetail/${career.id}`}
               className="border-[var(--text-dark)] border-1 p-4 flex justify-between"
               key={career.id}
@@ -56,6 +58,7 @@ export default async function CareerList({ currentPage }: { currentPage: number 
         <div className="flex justify-center mt-10 gap-x-10">
           {currentPage > 1 && (
             <Link
+              prefetch={false}
               href={{ pathname: "/careers", query: { page: currentPage - 1 } }}
               className="bg-zinc-800 rounded-full h-8 w-8 text-white flex justify-center items-center font-bold"
             >
@@ -65,6 +68,7 @@ export default async function CareerList({ currentPage }: { currentPage: number 
           <div className="text-sm flex items-center">{currentPage}</div>
           {currentPage * 10 < totalPages && (
             <Link
+              prefetch={false}
               href={{ pathname: "/careers", query: { page: currentPage + 1 } }}
               className="bg-zinc-800 rounded-full h-8 w-8 text-white flex justify-center items-center font-bold"
             >

@@ -7,8 +7,6 @@ import { FaChevronDown } from "react-icons/fa";
 export default function Header() {
   const [applyEnabled, setApplyEnabled] = useState<boolean | null>(null);
   const [open, setOpen] = useState(false);
-  const [showHeader, setShowHeader] = useState(true);
-  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const fetchApplyStatus = async () => {
@@ -18,41 +16,11 @@ export default function Header() {
     fetchApplyStatus();
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      // always show at very top
-      if (currentScrollY <= 0) {
-        setShowHeader(true);
-      } else {
-        const diff = currentScrollY - lastScrollY.current;
-
-        // scrolling down -> hide
-        if (diff > 5) {
-          setShowHeader(false);
-          setOpen(false);
-        }
-        // scrolling up -> show
-        else if (diff < -5) {
-          setShowHeader(true);
-        }
-      }
-
-      lastScrollY.current = currentScrollY;
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <div
       className={`
         flex justify-between items-center py-6 px-20 font-bold 
         bg-white sticky top-0 z-50 shadow-sm
-        transition-transform duration-300
-        ${showHeader ? "translate-y-0" : "-translate-y-full"}
       `}
     >
       <Link href="/" className="text-lg" prefetch={false}>
@@ -99,6 +67,7 @@ export default function Header() {
             <Link
               onClick={() => setOpen(false)}
               href="/logistics"
+              prefetch={false}
               className="hover:underline underline-offset-4 py-2"
             >
               Logistics
@@ -106,6 +75,7 @@ export default function Header() {
             <Link
               onClick={() => setOpen(false)}
               href="/compound"
+              prefetch={false}
               className="hover:underline underline-offset-4 py-2"
             >
               Compound
@@ -113,6 +83,7 @@ export default function Header() {
             <Link
               onClick={() => setOpen(false)}
               href="/it"
+              prefetch={false}
               className="hover:underline underline-offset-4 py-2"
             >
               IT
@@ -120,6 +91,7 @@ export default function Header() {
             <Link
               onClick={() => setOpen(false)}
               href="/agency"
+              prefetch={false}
               className="hover:underline underline-offset-4 py-2"
             >
               Agency
