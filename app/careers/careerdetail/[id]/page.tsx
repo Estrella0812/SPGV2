@@ -10,7 +10,7 @@ export default async function PositionDetails({ params }: { params: Promise<{ id
     if(!career){ return notFound();}
 
     return(
-        <div className="flex flex-wrap justify-center min-h-screen lg:pb-20 pb-10 bg-[var(--background)]" key={careerID}>
+        <div className="flex flex-wrap justify-center min-h-screen lg:pb-20 pb-10" key={careerID}>
             <div className="container max-w-5xl">
                 <div className="lg:mt-20 mt-10 lg:mx-0 mx-8">
                     <p className="text-3xl font-semibold">{career?.title}</p>

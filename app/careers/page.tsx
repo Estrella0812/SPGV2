@@ -7,7 +7,7 @@ export default async function CareersPage({ searchParams }: { searchParams: Prom
     const currentPage = Number(resolvedParams.page) || 1;
 
     return (
-        <div className="bg-[var(--background-lightGrey)]">
+        <div className="">
             {/* Hero section */}
             <div className="flex justify-center items-center w-full text-center h-[150px] bg-[var(--dark-background)]">
                 <div className="w-full text-[var(--background-lightGrey)]">
@@ -17,7 +17,7 @@ export default async function CareersPage({ searchParams }: { searchParams: Prom
             </div>
 
             {/* Suspense wrapper for careers list */}
-            <Suspense fallback={<div className="text-3xl min-h-[60vh] flex items-center justify-center">Loading...</div>}>
+            <Suspense fallback={<div className="text-3xl min-h-[90vh] flex items-center justify-center">Loading...</div>}>
                 <CareerList currentPage={currentPage} />
             </Suspense>
 
