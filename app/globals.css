@@ -1,8 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #ececec;
+  --background-grey: #ececec;
+  --background-lightGrey: #f3f3f3;
+
+  --text-light: #ececec;
+  --text-dark:#1c1b1b;
+  --dark-background: #1c1b1b;
 }
 
 @theme inline {
@@ -14,13 +19,221 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ececec;
+    --foreground: #171717;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@font-face {
+  font-family: 'HelveticaCustom';
+  src: url('/fonts/Helvetica.woff2') format('truetype');
+}
+
+html, body {
+  font-family: 'HelveticaCustom', sans-serif;
+  scroll-behavior: smooth;
+}
+
+
+
+
+/* Main line animation */
+.mm-line-animate {
+  /* 1) Draw once (0.8s)
+     2) Then pulse forever starting after 0.8s */
+  animation:
+    mm-draw-line 3s ease-out forwards,
+    mm-pulse-line 2.5s ease-in-out 3s infinite;
+}
+
+.mm-line-glow {
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
+}
+
+/* First: beam shoots out from center to bubble */
+@keyframes mm-draw-line {
+  0% {
+    /* don't touch stroke-dashoffset here –
+       it uses the inline value = length */
+    opacity: 0;
+  }
+  100% {
+    stroke-dashoffset: 0; /* fully drawn */
+    opacity: 1;
+  }
+}
+
+/* Then: soft glow / light pulsing along the already-drawn line */
+@keyframes mm-pulse-line {
+  0% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(135, 135, 135, 0.5));
+  }
+  50% {
+    opacity: 0.7;
+    filter: drop-shadow(0 0 18px rgba(255, 255, 255, 1));
+  }
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(135, 135, 135, 0.5));
+  }
+}
+
+
+.mm-line-dot {
+  animation: mm-line-dot-move 2.5s linear 1.5s infinite;
+}
+
+@keyframes mm-line-dot-move {
+  /* Don't touch stroke-dashoffset at 0% → uses inline value (= length) */
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0; /* travels to the end of the line */
+    opacity: 0;
+  }
+}
+
+/* Partner Slider */
+/* Scroller */
+.scroll {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #fff 20%, #fff 80%, transparent);
+}
+
+.scroll div {
+  white-space: nowrap;
+  /* animation: scroll var(--time) linear infinite;
+  animation-delay: calc(var(--time) * -1); */
+}
+
+.scroll1 div:nth-child(1) {
+  animation: scroll var(--time) linear infinite;
+  animation-delay: calc(var(--time) * -1);
+}
+
+.scroll1 div:nth-child(2) {
+  animation: scroll2 var(--time) linear infinite;
+  animation-delay: calc(var(--time) / -2);
+}
+
+.scroll2 div:nth-child(1) {
+  animation: scroll-left-to-right var(--time) linear infinite;
+  animation-delay: calc(var(--time) * -1);
+}
+
+.scroll2 div:nth-child(2) {
+  animation: scroll-left-to-right var(--time) linear infinite;
+  animation-delay: 0;
+}
+
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes scroll2 {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-200%);
+  }
+}
+
+@keyframes scroll-left-to-right {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.scroll div span {
+  display: inline-flex;
+  transition: 0.5s;
+}
+
+.imgBox div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .scrollerImage {
+    max-width: 70%;
+  }
+}
+
+
+
+/* Iframe for MAP */
+.iframe-container {
+  position: relative;
+  width: 100%; /* Full width of the container */
+  padding-top: 100%; /* Aspect ratio: 16:9 (height = width * 9/16) */
+  overflow: hidden;
+}
+
+.iframe-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+
+
+/* SPG SUBGROUP */
+/* Main Slider */
+.main-slider{
+  height: 80vh;
+  /* letter-spacing: 1.8px; */
+}
+
+.slider-text{
+  position: absolute;
+  top: 70%;
+  left: 0%;
+  transform: translate(0%, -50%);
+  /* top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+}
+
+@media (max-width: 768px) {
+  .slider-text {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translate(0%, -50%);
+  }
+}
+
+/* QUILL */
+.ql-editor h1 {
+  font-size: 2rem;
+}
+
+.ql-editor h2 {
+  font-size: 1.5rem;
+}
+
+.ql-editor h3 {
+  font-size: 1.25rem;
 }
